@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Posts</title>
+    <style>
+        /* Body Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Header Styles */
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 36px;
+            color: #2c3e50;
+            cursor: pointer; /* Adding cursor pointer for visual indication */
+            text-decoration: none; /* Remove default underline */
+        }
+
+        h1:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+
+        h1:visited {
+            color: #3498db; /* Change color after clicking */
+            text-decoration: underline; /* Underline after clicking */
+        }
+
+        /* Post Styles */
+        .post {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .post h2 {
+            font-size: 28px;
+            margin-top: 0;
+            color: #3498db;
+        }
+
+        .post p {
+            color: #666;
+        }
+
+        /* Pagination Styles */
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .pagination a {
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            margin: 0 5px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #333;
+            transition: background-color 0.3s ease;
+        }
+
+        .pagination a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .current {
+            font-weight: bold;
+            color: #fff;
+            background-color: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <!-- Updated "All Posts" h1 tag as a hyperlink -->
+    <h1 style="color: blue"> Simple Blog Post</h1>
+    <h1 onclick="window.location.href='{% url 'admin:index' %}'" style="color:red"><b>Add More Post Or Delete Post Click On Me</b></h1>
+
+    {% for post in posts %}
+        <div class="post">
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.content }}</p>
+            <p>Author: {{ post.author }}</p>
+            <p>Created at: {{ post.created_at }}</p>
+            <!-- Add other post details here -->
+        </div>
+    {% endfor %}
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if posts.has_previous %}
+                <a href="?page=1">&laquo; First</a>
+                <a href="?page={{ posts.previous_page_number }}">Previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+            </span>
+
+            {% if posts.has_next %}
+                <a href="?page={{ posts.next_page_number }}">Next</a>
+                <a href="?page={{ posts.paginator.num_pages }}">Last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</body>
+</html>
