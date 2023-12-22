@@ -80,7 +80,7 @@
 </head>
 <body>
     <!-- Updated "All Posts" h1 tag as a hyperlink -->
-    <h1 style="color: blue"> Simple Blog Post</h1>
+    <h1 style="colo: blue"> Simple Blog Post</h1>
     <h1 onclick="window.location.href='{% url 'admin:index' %}'" style="color:red"><b>Add More Post Or Delete Post Click On Me</b></h1>
 
     {% for post in posts %}
@@ -90,7 +90,7 @@
             <p>Author: {{ post.author }}</p>
             <p>Created at: {{ post.created_at }}</p>
             <!-- Add other post details here -->
-        </div>
+<!--        </div>-->
     {% endfor %}
 
     <div class="pagination">
@@ -109,6 +109,6 @@
                 <a href="?page={{ posts.paginator.num_pages }}">Last &raquo;</a>
             {% endif %}
         </span>
-    </div>
+
 </body>
 </html>
